@@ -137,6 +137,15 @@ void apply_layout(monitor_t *m, desktop_t *d, node_t *n, xcb_rectangle_t rect, x
 
 		window_border_width(n->id, bw);
 
+		/* hide non-focused windows in monocle_hide_others mode */
+		if (monocle_hide_others) {
+			if (d->layout == LAYOUT_MONOCLE && d->focus != n) {
+				hide_node(d, n);
+			} else {
+				show_node(d, n);
+				if (!d->focus) focus_node(m, d, n);
+			}
+		}
 	} else {
 		xcb_rectangle_t first_rect;
 		xcb_rectangle_t second_rect;
