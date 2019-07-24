@@ -1655,6 +1655,23 @@ void set_setting(coordinates_t loc, char *name, char *value, FILE *rsp)
 			fail(rsp, "config: %s: Invalid value: '%s'.\n", name, value);
 			return;
 		}
+	} else if (streq("monocle_hide_others", name)) {
+		bool b;
+		if (parse_bool(value, &b)) {
+			if (b == monocle_hide_others) {
+				fail(rsp, "");
+				return;
+			}
+			monocle_hide_others = b;
+			for (monitor_t *m = mon_head; m != NULL; m = m->next) {
+				for (desktop_t *d = m->desk_head; d != NULL; d = d->next) {
+					set_layout(m, d, d->layout, false);
+				}
+			}
+		} else {
+			fail(rsp, "config: %s: Invalid value: '%s'.\n", name, value);
+			return;
+		}
 	} else if (streq("focus_follows_pointer", name)) {
 		bool b;
 		if (parse_bool(value, &b)) {
