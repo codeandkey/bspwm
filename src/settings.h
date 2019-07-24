@@ -49,6 +49,7 @@
 #define BORDERLESS_MONOCLE          false
 #define GAPLESS_MONOCLE             false
 #define SINGLE_MONOCLE              false
+#define MONOCLE_HIDE_OTHERS         true
 
 #define FOCUS_FOLLOWS_POINTER       false
 #define POINTER_FOLLOWS_FOCUS       false
@@ -94,6 +95,7 @@ bool presel_feedback;
 bool borderless_monocle;
 bool gapless_monocle;
 bool single_monocle;
+bool monocle_hide_others;
 
 bool focus_follows_pointer;
 bool pointer_follows_focus;
